@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Cafe Online">
+    <meta name="keywords" content="cafe, bakery, booking">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warn Bakery Cafe - ติดต่อและจองโต๊ะ</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Warn Bakery Cafe</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/home">หน้าแรก</a></li>
+            <li><a href="/menu">เมนูเบเกอรี่ (Menu)</a></li>
+            <li><a href="/order" class="active">ติดต่อและจองโต๊ะ</a></li>
+            <li><a href="/home">เกี่ยวกับเรา</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h2>สั่งซื้อสินค้าและจองโต๊ะ</h2>
+        <form action="javascript:alert('บันทึก order สำเร็จ')" method="POST">
+            <fieldset>
+                <legend>เลือกเมนู</legend>
+                <div id="menu-list">
+                    <div class="menu-row">
+                        <div class="form-col-wide">
+                            <label for="menu">ชื่อเมนู</label>
+                            <select name="menu[]" class="menu-select" required>
+                                <option value="" disabled selected>-- เลือกเมนู --</option>
+                                <option value="ขนมปังหวาน" data-price="50">ขนมปังหวาน (50 บาท)</option>
+                                <option value="เดนิช" data-price="30">เดนิช (30 บาท)</option>
+                                <option value="บัตเตอร์เค้ก" data-price="30">บัตเตอร์เค้ก (30 บาท)</option>
+                                <option value="ลาเต้" data-price="99">ลาเต้ (99 บาท)</option>
+                                <option value="คาปูชิโน่" data-price="89">คาปูชิโน่ (89 บาท)</option>
+                                <option value="มัชฉะลาเต้" data-price="99">มัชฉะลาเต้ (99 บาท)</option>
+                            </select>
+                        </div>
+                        <div class="form-col-narrow">
+                            <label>จำนวน</label>
+                            <input type="number" class="qty-input" name="quantity[]" min="1" value="1">
+                        </div>
+                        <div class="form-col-wide">
+                            <label>คำสั่งเพิ่มเติม</label>
+                            <input type="text" name="note[]" placeholder="คำสั่งเพิ่มเติม">
+                        </div>
+                        <div class="form-col-action">
+                            <button type="button" onclick="removeRow(this)" title="ลบรายการ">X</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-add" onclick="addMenuRow()">+ เพิ่มรายการอาหาร</button>
+            </fieldset>
+            
+            <fieldset>
+                <legend>ข้อมูลจัดส่ง</legend>
+                <label for="fname">ชื่อ-นามสกุล</label>
+                <input type="text" name="fname" id="fname" placeholder="ระบุชื่อ-นามสกุล" required>
+                
+                <label for="phone">เบอร์โทร</label>
+                <input type="text" name="phone" id="phone" placeholder="ระบุเบอร์โทรศัพท์" required>
+                
+                <label for="address">ที่อยู่จัดส่ง</label>
+                <textarea name="address" id="address" placeholder="ระบุที่อยู่จัดส่ง" required></textarea>
+                
+                <div class="form-row-flex">
+                    <div class="form-col-half">
+                        <label for="dimdate">วันที่ต้องการ</label>
+                        <input type="date" name="date" id="dimdate" required>
+                    </div>
+                    <div class="form-col-half">
+                        <label for="dimtime">เวลาที่ต้องการ</label>
+                        <input type="time" name="time" id="dimtime" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn-submit">ยืนยันซื้อสินค้า</button>
+        </form>
+    </section>
+
+    <script>
+        function addMenuRow() {
+            const menulist = document.getElementById("menu-list");
+            const newRow = document.createElement('div');
+            newRow.className = 'menu-row';
+            newRow.innerHTML = `
+                <div class="form-col-wide">
+                    <label for="menu">ชื่อเมนู</label>
+                    <select name="menu[]" class="menu-select" required>
+                        <option value="" disabled selected>-- เลือกเมนู --</option>
+                        <option value="ขนมปังหวาน" data-price="50">ขนมปังหวาน (50 บาท)</option>
+                        <option value="เดนิช" data-price="30">เดนิช (30 บาท)</option>
+                        <option value="บัตเตอร์เค้ก" data-price="30">บัตเตอร์เค้ก (30 บาท)</option>
+                        <option value="ลาเต้" data-price="99">ลาเต้ (99 บาท)</option>
+                        <option value="คาปูชิโน่" data-price="89">คาปูชิโน่ (89 บาท)</option>
+                        <option value="มัชฉะลาเต้" data-price="99">มัชฉะลาเต้ (99 บาท)</option>
+                        <option value="น้ำแตงโมปั่น" data-price="25">น้ำแตงโมปั่น (25 บาท)</option>
+                    </select>
+                </div>
+                <div class="form-col-narrow">
+                    <label>จำนวน</label>
+                    <input type="number" class="qty-input" name="quantity[]" min="1" value="1">
+                </div>
+                <div class="form-col-wide">
+                    <label>คำสั่งเพิ่มเติม</label>
+                    <input type="text" name="note[]" placeholder="คำสั่งเพิ่มเติม">
+                </div>
+                <div class="form-col-action">
+                    <button type="button" onclick="removeRow(this)" title="ลบรายการ">X</button>
+                </div>
+            `;
+            menulist.appendChild(newRow);
+        }
+
+        function removeRow(button) {
+            const row = button.closest('.menu-row');
+            if (document.querySelectorAll('.menu-row').length > 1) {
+                row.remove();
+            } else {
+                alert("ต้องมีรายการอาหารอย่างน้อย 1 รายการ");
+            }
+        }
+    </script>
+</body>
+
+</html>
